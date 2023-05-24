@@ -21,24 +21,21 @@ for (let food of foods) {
 }
 
 let formFood = document.getElementById('foodForm');
+
 formFood.onsubmit = (event) => {
   event.preventDefault();
   console.log('Enviou o formulário');
 
-  let nome = document.getElementById('nome');
-  let descricao = document.getElementById('descricao');
-  let imagem = document.getElementById('imagem');
-  let preco = document.getElementById('preco');
+  let food = Object.fromEntries(new FormData(foodForm));
 
-  let food = {
-    nome: nome.value,
-    descricao: descricao.value,
-    imagem: imagem.value,
-    preco: preco.value,
-  };
-
+  // Adicionar o item no card.
   let card = createFoodCard(food);
   foodsDiv.insertAdjacentHTML('beforeend', card);
+
+  // Adicionar o item na lista.
+  foods.push(food);
+
+  localStorage.setItem('foods', JSON.stringify(foods));
 
   $('#formFoodModal').modal('toggle');
 };
