@@ -60,6 +60,9 @@ const loadFormCreateFood = () => {
 
     let food = Object.fromEntries(new FormData(foodForm));
 
+    const identificador = Date.now();
+    food.identificador = identificador;
+
     // Adicionar o item no card.
     let card = createFoodCard(food);
     foodsDiv.insertAdjacentHTML('beforeend', card);
