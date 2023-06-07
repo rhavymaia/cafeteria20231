@@ -41,7 +41,7 @@
 
     <!-- Botão -->
     <div style="display: block; width: 100%;" class="text-right">
-      <button type="button" class="btn btn-primary rounded-circle " data-bs-toggle="modal" data-bs-target="#formFoodModal">
+      <button type="button" class="btn btn-primary rounded-circle " data-bs-toggle="modal" data-bs-target="#formFoodModal" onclick="createFoodForm()">
         +
       </button>
     </div>
@@ -87,10 +87,17 @@
                 <input type="text" class="form-control" name="preco" id="preco">
               </div>
 
+              <!-- Data -->
+              <div class="mb-3">
+                <label for="preco" class="form-label">Fabricação</label>
+                <input type="date" class="form-control" name="fabricacao" id="fabricacao">
+              </div>
+
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
               <button type="submit" class="btn btn-primary">Salvar</button>
+              <!-- <input type="submit" class="btn btn-primary" value="Salvar"> -->
             </div>
           </form>
         </div>

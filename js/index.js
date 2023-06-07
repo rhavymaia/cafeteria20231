@@ -2,6 +2,12 @@ import foods from './foods.js';
 
 let foodsDiv = document.getElementById('foods');
 
+/**
+ * Criar card de food.
+ *
+ * @param {*} food
+ * @returns String
+ */
 const createFoodCard = (food) => {
   return `<div class='col'>
   <div class="card" style="width: 18rem;">
@@ -15,27 +21,62 @@ const createFoodCard = (food) => {
   </div>`;
 };
 
-for (let food of foods) {
-  let card = createFoodCard(food);
-  foodsDiv.insertAdjacentHTML('beforeend', card);
+/**
+ * Carregar os itens da lista de Foods.
+ */
+const loadFoods = () => {
+  for (let food of foods) {
+    let card = createFoodCard(food);
+    foodsDiv.insertAdjacentHTML('beforeend', card);
+  }
+};
+
+/**
+ * Define os valores dos campos de cadastro do Food no formulário.
+ *
+ * @param {*} nome
+ * @param {*} descricao
+ * @param {*} imagem
+ * @param {*} preco
+ */
+function setFormValues(nome = '', descricao = '', imagem = '', preco = '') {
+  const nomeInput = document.querySelector('#nome');
+  const descricaoInput = document.querySelector('#descricao');
+  const imagemInput = document.querySelector('#imagem');
+  const precoInput = document.querySelector('#preco');
+
+  nomeInput.value = nome;
+  descricaoInput.value = descricao;
+  imagemInput.value = imagem;
+  precoInput.value = preco;
 }
 
-let formFood = document.getElementById('foodForm');
+const loadFormCreateFood = () => {
+  let formFood = document.getElementById('foodForm');
 
-formFood.onsubmit = (event) => {
-  event.preventDefault();
-  console.log('Enviou o formulário');
+  formFood.onsubmit = (event) => {
+    event.preventDefault();
+    console.log('Enviou o formulário');
 
-  let food = Object.fromEntries(new FormData(foodForm));
+    let food = Object.fromEntries(new FormData(foodForm));
 
-  // Adicionar o item no card.
-  let card = createFoodCard(food);
-  foodsDiv.insertAdjacentHTML('beforeend', card);
+    // Adicionar o item no card.
+    let card = createFoodCard(food);
+    foodsDiv.insertAdjacentHTML('beforeend', card);
 
-  // Adicionar o item na lista.
-  foods.push(food);
+    // Adicionar o item na lista.
+    foods.push(food);
 
-  localStorage.setItem('foods', JSON.stringify(foods));
+    // Reiniciar valores dos campos dos formulários.
+    setFormValues();
 
-  $('#formFoodModal').modal('toggle');
+    localStorage.setItem('foods', JSON.stringify(foods));
+
+    $('#formFoodModal').modal('toggle');
+  };
 };
+
+// Adicionar a função no escopo da janela em execução.
+window.createFoodForm = loadFormCreateFood;
+
+loadFoods();
