@@ -64,6 +64,7 @@ const loadFormCreateFood = () => {
     food.identificador = identificador;
 
     // Adicionar o item no card.
+    // alteração.
     let card = createFoodCard(food);
     foodsDiv.insertAdjacentHTML('beforeend', card);
 
